@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     fetchUsers() {
-      axios.get('http://api.bocafast.io//get/user/users.php')
+      axios.get('http://api.bocafast.io/get/user/users.php')
         .then(res => {
           // console.log(res)
           this.users = res.data;

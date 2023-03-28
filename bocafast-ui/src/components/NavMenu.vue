@@ -12,7 +12,7 @@ export default {
   },
   methods: {
     isLogged() {
-      axios.get('http://api.bocafast.io//get/user/session.php')
+      axios.get('http://api.bocafast.io/get/user/session.php')
         .then( res => {
           this.logged = res.data.logged == 'true'
         })
@@ -21,7 +21,7 @@ export default {
         })
     },
     logout() {
-      axios.get('http://api.bocafast.io//get/user/logout.php')
+      axios.get('http://api.bocafast.io/get/user/logout.php')
         .then( res => {
           console.log(res)
           window.location.replace("/")

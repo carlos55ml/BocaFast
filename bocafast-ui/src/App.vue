@@ -16,13 +16,13 @@ export default {
   methods: {
     fetchUsers() {
       axios.get('http://bocafast.io/controller/usersController.php?action=getAllUsers')
-      .then( res => {
-        console.log(res)
-        this.users = res.data;
-      })
-      .catch( err => {
-        console.log(err)
-      })
+        .then(res => {
+          console.log(res)
+          this.users = res.data;
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 }
@@ -38,19 +38,19 @@ export default {
 
   <main>
     <table>
-  <thead>
-    <tr>
-      <th>id</th>
-      <th>username</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="user in users" :key="user.id">
-      <td>{{ user.id }}</td>
-      <td>{{ user.username }}</td>
-    </tr>
-  </tbody>
-</table>
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>username</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="user in users" :key="user.id">
+          <td>{{ user.id }}</td>
+          <td>{{ user.username }}</td>
+        </tr>
+      </tbody>
+    </table>
   </main>
 </template>
 

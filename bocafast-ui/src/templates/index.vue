@@ -1,4 +1,5 @@
 <script setup>
+import NavBar from '../components/NavBar.vue';
 
 </script>
 
@@ -15,13 +16,12 @@ export default {
   },
   methods: {
     fetchUsers() {
-      axios.get('http://bocafast.io/controller/usersController.php?action=getAllUsers')
+      axios.get('http://api.bocafast.io//get/user/users.php')
         .then(res => {
-          console.log(res)
           this.users = res.data;
         })
         .catch(err => {
-          console.log(err)
+          console.error(err);
         })
     }
   }
@@ -29,14 +29,12 @@ export default {
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-    </div>
-  </header>
+  <NavBar></NavBar>
 
   <main>
+    <h1>
+      Hello world!
+    </h1>
     <table>
       <thead>
         <tr>
@@ -51,35 +49,11 @@ export default {
         </tr>
       </tbody>
     </table>
+
   </main>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-}
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
 </style>
 

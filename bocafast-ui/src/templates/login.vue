@@ -4,6 +4,8 @@ import NavBar from "../components/NavBar.vue";
 
 <script>
 import axios from "axios";
+import { saveToken } from "./../assets/js/cookies"
+
 
 export default {
   data() {
@@ -34,7 +36,9 @@ export default {
         )
         .then((response) => {
           console.log(response.data);
-          window.location.pathname = '/'
+          saveToken(response.data.session_token)
+
+          window.location.pathname = "/";
         })
         .catch((error) => {
           console.log(error.response.data);

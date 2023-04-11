@@ -1,13 +1,26 @@
 <?php
-session_start();
+require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/../../config.php';
+require_once __DIR__ . '/../../model/Users.php';
+use Firebase\JWT\JWT;
+
+
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
-require_once __DIR__ . '/../../model/Users.php';
 
 function createSession($user) {
-  $_SESSION['id'] = $user['id'];
-  $_SESSION['username'] = $user['username'];
+  $session_data = array(
+    'id' => $user['id'],
+    'username' => $user['username'],
+    'admin' => $user['isAdmin']
+  );
+  $token = JWT::encode($session_data, Config::$secret_key, 'HS256');
+  $expires_at = time() + Config::$token_duration;
+  return json_encode(array(
+    'session_token' => $token,
+    'expires_at' => $expires_at
+  ));
 }
 
 function tryUserLogin($username, $password) {
@@ -26,9 +39,8 @@ function tryUserLogin($username, $password) {
 
   // Si pasa todos los filtros, login correcto
 
-  createSession($user);
   http_response_code(200);
-  echo json_encode(array('exito' => 'Login correcto.'));
+  echo createSession($user);
   return;
 }
 

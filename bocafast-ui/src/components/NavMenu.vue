@@ -31,6 +31,7 @@ export default {
     },
     logout() {
       deleteToken()
+      location.reload()
       // axios
       //   .get("http://api.bocafast.io/get/user/logout.php")
       //   .then((res) => {

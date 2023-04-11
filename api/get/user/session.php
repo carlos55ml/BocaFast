@@ -11,9 +11,15 @@ header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   http_response_code(200);
-  $token = getallheaders()['auth_token'];
-  $decoded = JWT::decode($token, new Key(Config::$secret_key, 'HS256'));
-  echo json_encode($decoded);
+  if (isset(getallheaders()['auth_token'])) {
+    $token = getallheaders()['auth_token'];
+    $decoded = JWT::decode($token, new Key(Config::$secret_key, 'HS256'));
+    echo json_encode($decoded);
+  } else {
+    echo json_encode([
+      "logged" => "false"
+    ]);
+  }
 }
 
 ?>

@@ -14,6 +14,7 @@ export default {
     isLogged() {
       axios.get('http://api.bocafast.io/get/user/session.php')
         .then( res => {
+          console.log("logged: ", res)
           this.logged = res.data.logged == 'true'
         })
         .catch( err => {
@@ -37,6 +38,6 @@ export default {
   <li v-if="logged"><a href="#">Mi perfil</a></li>
   <li v-if="logged"><a href="#">Mis pedidos</a></li>
   <li v-if="logged"><a @click="logout">Cerrar sesion</a></li>
-  <li v-if="!logged"><a href="#">Iniciar sesion</a></li>
+  <li v-if="!logged"><a href="/login.html">Iniciar sesion</a></li>
   <li v-if="!logged"><a href="#">Registrarse</a></li>
 </template>

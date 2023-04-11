@@ -13,7 +13,15 @@ class Users {
     $res = DB::preparedQuery(
       'SELECT * FROM users WHERE id=?',
       [$id]
-    );
+    )[0];
+    return json_encode($res);
+  }
+
+  public static function getUserByName($name) {
+    $res = DB::preparedQuery(
+      'SELECT * FROM users WHERE username=?',
+      [$name]
+    )[0];
     return json_encode($res);
   }
 }

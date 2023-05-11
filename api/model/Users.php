@@ -26,5 +26,21 @@ class Users {
     if($res and $res[0]) return json_encode($res[0]);
     return null;
   }
+
+  public static function createNewUser(string $username, string $password) {
+    $createdUserId = DB::preparedQueryRetId(
+      'INSERT INTO users(username, passwd, is_admin) VALUES (?, ?, 0)',
+      [$username, $password]
+    );
+    if (!$createdUserId) {
+      return null;
+    }
+    $res = DB::preparedQuery(
+      'SELECT * FROM users WHERE id=?',
+      [$createdUserId]
+    );
+    if($res and $res[0]) return $res[0];
+    return null;
+  }
 }
 ?>

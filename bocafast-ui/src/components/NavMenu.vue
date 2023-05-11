@@ -43,5 +43,5 @@ export default {
   <li v-if="logged"><a href="#">Mis pedidos</a></li>
   <li v-if="logged"><a @click="logout">Cerrar sesion</a></li>
   <li v-if="!logged"><a href="/login.html">Iniciar sesion</a></li>
-  <li v-if="!logged"><a href="#">Registrarse</a></li>
+  <li v-if="!logged"><a href="/register.html">Registrarse</a></li>
 </template>

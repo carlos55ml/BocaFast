@@ -111,7 +111,7 @@ export default {
                     </button>
                   </div>
                   <div class="uk-text-small uk-text-center">
-                    No tienes cuenta? <a href="#">Registrate aqui</a>
+                    No tienes cuenta? <a href="/register.html">Registrate aqui</a>
                   </div>
                 </form>
               </div>

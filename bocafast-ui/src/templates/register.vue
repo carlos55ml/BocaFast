@@ -18,7 +18,32 @@ export default {
      */
     $("#loginForm").submit((event) => {
       event.preventDefault();
-      this.showAlert("test")
+      axios
+        .post(
+          "http://api.bocafast.io/helpers/session/register.php",
+          {
+            username: $("#username").val(),
+            password: $("#password").val(),
+          },
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res)
+          let error = res.data.error ?? null;
+          if(error) {
+            this.showAlert(error);
+            return;
+          }
+          saveToken(res.data.session_token)
+          window.location.pathname = "/";
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
     });
   },
   methods: {
@@ -83,7 +108,7 @@ export default {
                     </button>
                   </div>
                   <div class="uk-text-small uk-text-center">
-                    Ya tienes cuenta? <a href="#">Inicia Sesion</a>
+                    Ya tienes cuenta? <a href="/login.html">Inicia Sesion</a>
                   </div>
                 </form>
               </div>

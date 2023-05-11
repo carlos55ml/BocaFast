@@ -13,16 +13,18 @@ class Users {
     $res = DB::preparedQuery(
       'SELECT * FROM users WHERE id=?',
       [$id]
-    )[0];
-    return json_encode($res);
+    );
+    if($res and $res[0]) return json_encode($res[0]);
+    return null;
   }
 
   public static function getUserByName($name) {
     $res = DB::preparedQuery(
       'SELECT * FROM users WHERE username=?',
       [$name]
-    )[0];
-    return json_encode($res);
+    );
+    if($res and $res[0]) return json_encode($res[0]);
+    return null;
   }
 }
 ?>

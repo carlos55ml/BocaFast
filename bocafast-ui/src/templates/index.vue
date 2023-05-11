@@ -1,30 +1,21 @@
 <script setup>
 import NavBar from '../components/NavBar.vue';
 
+
 </script>
 
 <script>
-import axios from 'axios';
+import emitter from './../assets/js/emitter'
 export default {
   data() {
     return {
-      users: []
+      user: {}
     };
   },
   mounted() {
-    this.fetchUsers();
+    emitter.on('userObj', user =>{ this.user = user })
   },
-  methods: {
-    fetchUsers() {
-      axios.get('http://api.bocafast.io/get/user/users.php')
-        .then(res => {
-          this.users = res.data;
-        })
-        .catch(err => {
-          console.error(err);
-        })
-    }
-  }
+  methods: {}
 }
 </script>
 
@@ -32,24 +23,14 @@ export default {
   <NavBar></NavBar>
 
   <main>
-    <h1>
-      Hello world!
-    </h1>
-    <table>
-      <thead>
-        <tr>
-          <th>id</th>
-          <th>username</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="user in users" :key="user.id">
-          <td>{{ user.id }}</td>
-          <td>{{ user.username }}</td>
-        </tr>
-      </tbody>
-    </table>
-
+    <div class="uk-container uk-align-center">
+      <h1 class="uk-text-center">
+        Bienvenido a <span>Boca<span style="color: red">Fast</span></span><span v-if="this.user.username">, {{ this.user.username }}</span>
+      </h1>
+    </div>
+    <div class="uk-container">
+      <h2 class="uk-text-center"><span style="color:red;">Nuestros</span> productos:</h2>
+    </div>
   </main>
 </template>
 

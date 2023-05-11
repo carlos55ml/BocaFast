@@ -13,7 +13,7 @@ function createSession($user) {
   $session_data = array(
     'id' => $user['id'],
     'username' => $user['username'],
-    'admin' => $user['isAdmin']
+    'admin' => $user['is_admin']
   );
   $token = JWT::encode($session_data, Config::$secret_key, 'HS256');
   $expires_at = time() + Config::$token_duration;
@@ -28,12 +28,12 @@ function tryUserLogin($username, $password) {
   // Si el usuario no existe devolvemos error
   if (empty($user)) {
     http_response_code(400);
-    echo json_encode(array('error' => 'El usuario no existe.'));
+    echo json_encode(['error' => 'El usuario no existe.']);
     return;
   }
   if($user['passwd'] != $password) {
-    http_response_code(401);
-    echo json_encode(array('error' => 'contra incorrecta.'));
+    http_response_code(400);
+    echo json_encode(['error' => 'contra incorrecta.']);
     return;
   }
 
@@ -50,20 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   if(!is_null($username) and !is_null($password)) {
     tryUserLogin($username, $password);
+  } else {
+    http_response_code(400);
+    echo json_encode(['error' => 'Datos introducidos incorrectos.']);
   }
-  // session_start();
-  // http_response_code(200);
-  // if (isset($_SESSION['id'])) {
-  //   echo json_encode(array(
-  //     'logged' => 'true',
-  //     'userId' => $_SESSION['id'],
-  //     'userName' => $_SESSION['username']
-  //   ));
-  // } else {
-  //   echo json_encode(array(
-  //     'logged' => 'false'
-  //   ));
-  // }
+
 }
 
 ?>

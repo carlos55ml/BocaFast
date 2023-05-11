@@ -2,6 +2,7 @@
 import axios from "axios";
 import { getToken, deleteToken } from "../assets/js/cookies";
 import { isString } from "@vue/shared";
+import emitter from './../assets/js/emitter';
 
 export default {
   data() {
@@ -23,6 +24,7 @@ export default {
         .then((res) => {
           console.log("logged: ", res);
           res.data.id ? this.logged = true : this.logged = false;
+          emitter.emit('userObj', res.data)
           console.log("loggeado>? ", this.logged)
         })
         .catch((err) => {
@@ -32,15 +34,6 @@ export default {
     logout() {
       deleteToken()
       location.reload()
-      // axios
-      //   .get("http://api.bocafast.io/get/user/logout.php")
-      //   .then((res) => {
-      //     console.log(res);
-      //     window.location.replace("/");
-      //   })
-      //   .catch((err) => {
-      //     console.error(err);
-      //   });
     },
   },
 };

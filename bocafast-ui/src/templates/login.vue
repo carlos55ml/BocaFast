@@ -35,7 +35,6 @@ export default {
           }
         )
         .then((response) => {
-          console.log(response.data);
           saveToken(response.data.session_token)
 
           window.location.pathname = "/";

@@ -32,7 +32,6 @@ export default {
           }
         )
         .then((res) => {
-          console.log(res)
           let error = res.data.error ?? null;
           if(error) {
             this.showAlert(error);

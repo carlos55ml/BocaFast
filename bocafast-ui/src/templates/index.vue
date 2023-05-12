@@ -1,7 +1,5 @@
 <script setup>
 import NavBar from '../components/NavBar.vue';
-
-
 </script>
 
 <script>
@@ -13,7 +11,7 @@ export default {
     };
   },
   mounted() {
-    emitter.on('userObj', user =>{ this.user = user })
+    emitter.on('userObj', userObj =>{ this.user = userObj; })
   },
   methods: {}
 }
@@ -25,7 +23,7 @@ export default {
   <main>
     <div class="uk-container uk-align-center">
       <h1 class="uk-text-center">
-        Bienvenido a <span>Boca<span style="color: red">Fast</span></span><span v-if="this.user.username">, {{ this.user.username }}</span>
+        Bienvenido a Boca<span style="color: red">Fast</span><span v-if="user">, {{ user.username }}</span>
       </h1>
     </div>
     <div class="uk-container">

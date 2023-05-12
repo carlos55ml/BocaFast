@@ -24,7 +24,8 @@ export default {
         .then((res) => {
           console.log("logged: ", res);
           res.data.id ? this.logged = true : this.logged = false;
-          emitter.emit('userObj', res.data)
+          if(this.logged) emitter.emit('userObj', res.data);
+          else emitter.emit('userObj', null)
           console.log("loggeado>? ", this.logged)
         })
         .catch((err) => {

@@ -33,7 +33,7 @@ function tryUserLogin($username, $password) {
   }
   if($user['passwd'] != $password) {
     http_response_code(400);
-    echo json_encode(['error' => 'contra incorrecta.']);
+    echo json_encode(['error' => 'Contraseña incorrecta.']);
     return;
   }
 

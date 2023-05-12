@@ -14,7 +14,7 @@ export default {
     };
   },
   mounted() {
-    this.fetchUsers();
+    $('#error-alert').hide()
 
     /**
      * Login Form Event
@@ -41,21 +41,17 @@ export default {
           window.location.pathname = "/";
         })
         .catch((error) => {
-          console.log(error.response.data);
+          let errMessage = error.response.data.error
+          this.showAlert(errMessage);
         });
     });
   },
   methods: {
-    fetchUsers() {
-      axios
-        .get("http://api.bocafast.io/get/user/users.php")
-        .then((res) => {
-          this.users = res.data;
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    },
+    showAlert(message) {
+      console.log("showing")
+      $('#error-message').html(message)
+      $('#error-alert').show()
+    }
   },
 };
 </script>
@@ -102,6 +98,7 @@ export default {
                       />
                     </div>
                   </div>
+                  <div id="error-alert" class="uk-alert-danger" uk-alert><p id="error-message"></p></div>
                   <div class="uk-margin">
                     <button
                       type="submit"

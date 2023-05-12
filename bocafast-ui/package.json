@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build -l info -d",
     "preview": "vite preview"
   },
   "dependencies": {

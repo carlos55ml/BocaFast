@@ -18,7 +18,8 @@ export default defineConfig({
         index: resolve(__dirname, './index.html'),
         bocatas: resolve(__dirname, './bocatas.html'),
         pedidos: resolve(__dirname, './pedido.html'),
-        login: resolve(__dirname, './login.html')
+        login: resolve(__dirname, './login.html'),
+        register: resolve(__dirname, './register.html'),
       },
     },
   }

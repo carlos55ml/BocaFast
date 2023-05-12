@@ -1,0 +1,6 @@
+button.uk-button#registerButton {
+  background-color: #6921c7;
+}
+button.uk-button#registerButton:hover {
+  background-color: #4d0f9e;
+}

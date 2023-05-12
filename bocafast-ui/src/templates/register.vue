@@ -42,13 +42,14 @@ export default {
           window.location.pathname = "/";
         })
         .catch((error) => {
-          console.log(error.response.data);
+          let errMessage = error.response.data.error
+          this.showAlert(errMessage);
+          return;
         });
     });
   },
   methods: {
     showAlert(message) {
-      console.log("showing")
       $('#error-message').html(message)
       $('#error-alert').show()
     }

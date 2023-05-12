@@ -48,7 +48,6 @@ export default {
   },
   methods: {
     showAlert(message) {
-      console.log("showing")
       $('#error-message').html(message)
       $('#error-alert').show()
     }

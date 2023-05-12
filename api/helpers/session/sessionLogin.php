@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $username = isset($_POST['username'])?$_POST['username']:null;
   $password = isset($_POST['password'])?$_POST['password']:null;
 
-  if(!is_null($username) and !is_null($password)) {
+  if(!empty($username) and !empty($password)) {
     tryUserLogin($username, $password);
   } else {
     http_response_code(400);

@@ -66,6 +66,19 @@ class DB {
       return null;
     }
   }
+  public static function preparedQueryDelete(string $query, array $values) {
+    if (!self::checkDbConnection()) return null;
+    try {
+      $stmt = self::$dbo->prepare($query);
+      $stmt->execute($values);
+      $result = $stmt->rowCount();
+      return $result;
+    } catch (PDOException $ex) {
+      setcookie("errorMessage", "Error en la query $query ====>>> $ex.", 0, "/");
+      header("Location:/error.php");
+      return null;
+    }
+  }
 
   /**
    * Executes a prepared statment and returns the last inser id.

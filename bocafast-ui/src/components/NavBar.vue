@@ -4,20 +4,27 @@ import NavMenu from '../components/NavMenu.vue';
 </script>
 <script>
 import './../assets/css/NavBar.css';
+import emitter from './../assets/js/emitter'
 const location = window.location.pathname;
 const locations = {
   'Inicio' : '/',
   'Bocatas': '/bocatas.html',
   'Pedir': '/pedido.html'
 }
+const adminLocations = {
+  'Administrar' : '/admin/'
+}
 export default {
   data() {
     return {
-      windowLocation: location
+      windowLocation: location,
+      user: {}
     };
   },
   mounted() {
-    this.setActive();
+    this.setActive()
+    emitter.on('userObj', userObj =>{ this.user = userObj; this.isAdmin() })
+    
   },
   methods: {
     setActive() {
@@ -30,6 +37,19 @@ export default {
         }
       })
       $('#navPages').append(navPages)
+    },
+    isAdmin() {
+      let navPages = ''
+      if (this.user && this.user.admin) {
+        Object.entries(adminLocations).forEach(([k, v]) => {
+          if (location == v) {
+            navPages += `<li class='uk-active'><a href="${v}">${k}</a></li>`
+          } else {
+            navPages += `<li><a href="${v}">${k}</a></li>`
+          }
+        })
+        $('#navPages').append(navPages)
+      }
     }
     
   }

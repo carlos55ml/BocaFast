@@ -20,6 +20,8 @@ export default defineConfig({
         pedidos: resolve(__dirname, './pedido.html'),
         login: resolve(__dirname, './login.html'),
         register: resolve(__dirname, './register.html'),
+        admin: resolve(__dirname, './admin/index.html'),
+        'admin/ingredients': resolve(__dirname, './admin/ingredients/index.html')
       },
     },
   }

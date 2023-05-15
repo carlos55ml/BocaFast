@@ -42,8 +42,6 @@ export default {
   <main class="uk-container uk-align-center" v-if="user && user.admin" :key="user">
     <h1 class="uk-text-center">Administracion</h1>
     <ul class="adminSummary">
-      <li>Total ingredentes guardados: <b>{{ totalIngredientsNumber }}</b> - <a href="/admin/ingredients/"><button class="uk-button uk-button-secondary uk-button-small">Modificar Ingredientes</button></a></li>
-      <li>Total complementos guardados: <b>{{ totalComplementsNumber }}</b> - <a href="/admin/complements/"><button class="uk-button uk-button-primary uk-button-small">Modificar Complementos</button></a></li>
       <li>Total piezas predefinidas guardadas: <b>{{ totalPiecesNumber }}</b> - <a href="/admin/pieces/"><button class="uk-button uk-button-secondary uk-button-small">Modificar Piezas Predefinidas</button></a></li>
       <li>Total pedidos activos: <b>{{ totalOrders }}</b> - <a href="/admin/orders/"><button class="uk-button uk-button-danger uk-button-small">Gestionar Pedidos</button></a></li>
     </ul>

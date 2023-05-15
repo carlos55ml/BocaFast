@@ -15,6 +15,12 @@ class Orders {
       []
     );
   }
+  public static function getOrderById($orderId) {
+    return DB::preparedQuery(
+      "SELECT * FROM pedidos WHERE id=?",
+      [$orderId]
+    );
+  }
   public static function getAllActiveOrders() {
     return DB::preparedQuery(
       "SELECT pedidos.*, users.username FROM pedidos 

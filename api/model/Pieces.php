@@ -8,5 +8,11 @@ class Pieces {
       []
     )[0][0];
   }
+  public static function getAllPieces() {
+    return DB::preparedQuery(
+      "SELECT * FROM piezas_definidas",
+      []
+    );
+  }
 }
 ?>

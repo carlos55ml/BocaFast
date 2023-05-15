@@ -5,7 +5,7 @@ import NavBar from "../../../components/NavBar.vue";
 <script>
 import emitter from "./../../../assets/js/emitter";
 import {
-  getAllOrders,
+  getOrderById,
   deleteOrder,
   getQuery
 } from "./../../../assets/js/adminHelper";
@@ -13,7 +13,7 @@ export default {
   data() {
     return {
       user: {},
-      allOrders: [],
+      orderData: [],
       orderDetailsId: null
     };
   },
@@ -32,7 +32,9 @@ export default {
         window.location = "/";
       }
     },
-    async setPageData() {},
+    async setPageData() {
+      this.orderData = await getOrderById(this.orderDetailsId)
+    },
     async deletePedido(orderId) {
       let confirmDelete = confirm(`¿Está seguro que desea borrar el pedido con id ${orderId}?`);
       if (confirmDelete) {
@@ -48,52 +50,13 @@ export default {
   <NavBar></NavBar>
 
   <main class="uk-container uk-align-center" v-if="user && user.admin">
-    <h1 class="uk-text-center">Ver detalle pedido {{ orderDetailsId }}</h1>
+    <h1 class="uk-text-center">Ver detalle de pedido: <b>{{ orderDetailsId }}</b></h1>
     <div class="uk-container">
-      <button class="uk-position-center uk-button uk-button-small uk-button-secondary" @click="setPageData()">Recargar pedidos</button>
+      <button class="uk-position-center uk-button uk-button-small uk-button-secondary" @click="setPageData()">Recargar pedido</button>
     </div>
     <br>
     <div class="uk-container">
-      <table
-        class="items-table uk-table uk-table-divider uk-table-striped uk-table-hover"
-      >
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Precio</th>
-            <th>Estado</th>
-            <th>Fecha</th>
-            <th>ID Usuario</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody :key="allOrders">
-          <tr v-for="order in allOrders" :key="order.id" :id="order.id">
-            <td><b>{{ order.id }}</b></td>
-            <td>{{ order.precio_total }}</td>
-            <td>{{ order.estado }}</td>
-            <td>{{ order.fecha }}</td>
-            <td>{{ order.id_usuario }}</td>
-            <td>
-              <button class="uk-button uk-button-small uk-button-secondary">
-                Detalle / Editar</button
-              ><button
-                class="uk-button uk-button-small uk-button-danger"
-                @click="deletePedido(order.id)"
-              >
-                Eliminar
-              </button>
-              <button
-                class="uk-button uk-button-small uk-button-primary"
-                @click=""
-                v-if="order.estado == 'en proceso'"
-              >
-                Terminado
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      
     </div>
   </main>
 </template>

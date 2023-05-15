@@ -94,6 +94,21 @@ export const countAllPieces = async () => {
   })
 }
 
+export const getAllPieces = async () => {
+  return await axios.get('http://api.bocafast.io/get/pieces/getAllPieces.php',
+  {
+    headers: {
+      auth_token: getUserToken(),
+    }
+  })
+  .then((res) => {
+    return res.data;
+  })
+  .catch((err) => {
+    console.log(err)
+    return err;
+  })
+}
 /** PEDIDOS */
 export const countAllActiveOrders = async () => {
   return await axios.get('http://api.bocafast.io/get/orders/countAllActiveOrders.php',
@@ -126,6 +141,26 @@ export const getAllOrders = async () => {
     return err;
   })
 }
+
+export const getOrderById = async (orderId) => {
+  return await axios.get('http://api.bocafast.io/get/orders/getOrderById.php',
+  {
+    headers: {
+      auth_token: getUserToken(),
+    },
+    params: {
+      orderId: orderId
+    }
+  })
+  .then((res) => {
+    return res.data;
+  })
+  .catch((err) => {
+    console.log(err)
+    return err;
+  })
+}
+
 export const getAllActiveOrders = async () => {
   return await axios.get('http://api.bocafast.io/get/orders/getAllActiveOrders.php',
   {

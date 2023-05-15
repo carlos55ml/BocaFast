@@ -1,10 +1,10 @@
 <script setup>
-import NavBar from "../components/NavBar.vue";
+import NavBar from "../../components/NavBar.vue";
 </script>
 
 <script>
-import emitter from "./../assets/js/emitter";
-import { getAllPieces } from "./../assets/js/adminHelper";
+import emitter from "./../../assets/js/emitter";
+import { getAllPieces } from "./../../assets/js/adminHelper";
 export default {
   data() {
     return {
@@ -15,10 +15,18 @@ export default {
   mounted() {
     emitter.on("userObj", (userObj) => {
       this.user = userObj;
+      this.checkAdmin();
     });
     this.setPageData();
   },
   methods: {
+    checkAdmin() {
+      if (!this.user || !this.user.admin == 1) {
+        alert("Necesitas ser administrador para ver esta pagina.");
+        window.location = "/";
+      }
+      this.setPageData();
+    },
     async setPageData() {
       this.allPieces = await getAllPieces();
     },
@@ -29,9 +37,15 @@ export default {
 <template>
   <NavBar></NavBar>
 
-  <main class="uk-container uk-align-center">
+  <main class="uk-container uk-align-center" v-if="user && user.admin">
     <h1 class="uk-text-center">BOCATAS</h1>
     <div class="uk-container">
+      <button
+        class="uk-position-center uk-button uk-button-small uk-button-secondary"
+        @click="setPageData()"
+      >
+        Recargar Bocatas
+      </button>
     </div>
     <br />
     <div class="uk-container">

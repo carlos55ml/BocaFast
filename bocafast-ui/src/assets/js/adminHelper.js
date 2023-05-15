@@ -7,6 +7,11 @@ function getUserToken() {
   return token;
 }
 
+
+export const getQuery = (q) => {
+  return (location.search.match(new RegExp('[?&]' + q + '=([^&]+)')) || [, null])[1];
+}
+
 /** INGREDIENTS */
 export const countAllIngredients = async () => {
   return await axios.get('http://api.bocafast.io/get/ingredients/countAllIngredients.php',
@@ -105,4 +110,107 @@ export const countAllActiveOrders = async () => {
     return err;
   })
 }
+
+export const getAllOrders = async () => {
+  return await axios.get('http://api.bocafast.io/get/orders/getAllOrders.php',
+  {
+    headers: {
+      auth_token: getUserToken(),
+    }
+  })
+  .then((res) => {
+    return res.data;
+  })
+  .catch((err) => {
+    console.log(err)
+    return err;
+  })
+}
+export const getAllActiveOrders = async () => {
+  return await axios.get('http://api.bocafast.io/get/orders/getAllActiveOrders.php',
+  {
+    headers: {
+      auth_token: getUserToken(),
+    }
+  })
+  .then((res) => {
+    return res.data;
+  })
+  .catch((err) => {
+    console.log(err)
+    return err;
+  })
+}
+export const getAllFinishedOrders = async () => {
+  return await axios.get('http://api.bocafast.io/get/orders/getAllFinishedOrders.php',
+  {
+    headers: {
+      auth_token: getUserToken(),
+    }
+  })
+  .then((res) => {
+    return res.data;
+  })
+  .catch((err) => {
+    console.log(err)
+    return err;
+  })
+}
+
+export const cancelOrder = async (orderId) => {
+  return await axios.get('http://api.bocafast.io/set/orders/cancelOrder.php',
+  {
+    headers: {
+      auth_token: getUserToken(),
+    },
+    params: {
+      orderId: orderId
+    }
+  })
+  .then((res) => {
+    return res.data;
+  })
+  .catch((err) => {
+    console.log(err)
+    return err;
+  })
+}
+export const deleteOrder = async (orderId) => {
+  return await axios.get('http://api.bocafast.io/set/orders/deleteOrder.php',
+  {
+    headers: {
+      auth_token: getUserToken(),
+    },
+    params: {
+      orderId: orderId
+    }
+  })
+  .then((res) => {
+    return res.data;
+  })
+  .catch((err) => {
+    console.log(err)
+    return err;
+  })
+}
+export const changeOrderState = async (orderId, state) => {
+  return await axios.get('http://api.bocafast.io/set/orders/setOrderState.php',
+  {
+    headers: {
+      auth_token: getUserToken(),
+    },
+    params: {
+      orderId: orderId,
+      state: state
+    }
+  })
+  .then((res) => {
+    return res.data;
+  })
+  .catch((err) => {
+    console.log(err)
+    return err;
+  })
+}
+
 

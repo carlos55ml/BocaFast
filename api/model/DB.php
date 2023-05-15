@@ -15,9 +15,8 @@ class DB {
       self::$dbo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
       self::$dbo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch (PDOException $ex) {
-      setcookie("errorMessage", "Error en la conexion a Base de Datos.", 0, "/");
-      header("Location:/error.php");
       self::$dbo = null;
+      return ['error' => "$ex"];
     }
   }
 
@@ -41,9 +40,7 @@ class DB {
       $result = self::$dbo->query($query);
       return $result;
     } catch (PDOException $ex) {
-      setcookie("errorMessage", "Error en la query $query ====>>> $ex.", 0, "/");
-      header("Location:/error.php");
-      return null;
+      return ['error' => "$ex"];
     }
   }
 
@@ -61,9 +58,7 @@ class DB {
       $result = $stmt->fetchAll();
       return $result;
     } catch (PDOException $ex) {
-      setcookie("errorMessage", "Error en la query $query ====>>> $ex.", 0, "/");
-      header("Location:/error.php");
-      return null;
+      return ['error' => "$ex"];
     }
   }
   public static function preparedQueryDelete(string $query, array $values) {
@@ -74,9 +69,7 @@ class DB {
       $result = $stmt->rowCount();
       return $result;
     } catch (PDOException $ex) {
-      setcookie("errorMessage", "Error en la query $query ====>>> $ex.", 0, "/");
-      header("Location:/error.php");
-      return null;
+      return ['error' => "$ex"];
     }
   }
 
@@ -94,9 +87,7 @@ class DB {
       $result = self::$dbo->lastInsertId();
       return $result;
     } catch (PDOException $ex) {
-      setcookie("errorMessage", "Error en la query $query ====>>> $ex.", 0, "/");
-      header("Location:/error.php");
-      return null;
+      return ['error' => "$ex"];
     }
   }
 }

@@ -40,7 +40,7 @@ export default {
           <img :src="item.imagen" width="300" height="300" alt="" uk-cover/>
           <canvas width="300" height="300"></canvas>
         </div>
-        <div class="uk-card-bodyq">
+        <div class="uk-card-body">
           <h3 class="uk-card-title"><b>{{ item.nombre }}</b></h3>
           <p>{{ item.descripcion }}</p>
           <p>

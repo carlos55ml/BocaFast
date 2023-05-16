@@ -42,9 +42,9 @@ export default {
         <span style="color: red">Nuestros</span> productos:
       </h2>
     </div>
-    <div class="uk-slider-container-offset uk-height-1-2" uk-slider="center: true">
+    <div class="uk-slider-container-offset uk-height-1-2" uk-slider="autoplay: true">
       <div
-        class="uk-position-relative uk-visible-toggle uk-light"
+        class="uk-position-relative uk-visible-toggle uk-dark"
         tabindex="-1"
       >
         <ul class="uk-slider-items uk-child-width-1-4@s uk-grid">

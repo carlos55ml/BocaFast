@@ -10,6 +10,7 @@ export default {
     return {
       user: {},
       allPieces: [],
+      piecesElements: []
     };
   },
   mounted() {
@@ -26,10 +27,23 @@ export default {
         window.location = "/";
       }
       this.setPageData();
+      this.$nextTick(() => {
+        this.initSearchBox()
+      })
     },
     async setPageData() {
       this.allPieces = await getAllPieces();
     },
+    initSearchBox() {
+      $('input#search-input').on('input', () => {
+        let searchTerm = $('input#search-input').val()
+        this.$refs.pieces.forEach(element => {
+          let title = element.querySelector('h3#pieceTitle').textContent.toLowerCase();
+          if(title.includes(searchTerm)) element.style.display = 'flex';
+          else element.style.display = 'none';
+        });
+      })
+    }
   },
 };
 </script>
@@ -48,14 +62,21 @@ export default {
       </button>
     </div>
     <br />
-    <div class="uk-container">
-      <div :key="allPieces" v-for="item in allPieces" class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
+    <div class="uk-form-controls uk-form-controls-text uk-form-horizontal">
+      <div>
+        <label for="search-input" class="uk-form-label">Busqueda:</label>
+        <input ref="searchBox" type="text" class="uk-input" name="search-input" id="search-input">
+      </div>
+    </div>
+    <br>
+    <div class="uk-container" :key="allPieces">
+      <div ref="pieces" v-for="item in allPieces" class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
         <div class="uk-card-media-left uk-cover-container">
           <img :src="item.imagen" width="300" height="300" alt="" uk-cover/>
           <canvas width="300" height="300"></canvas>
         </div>
-        <div class="uk-card-bodyq">
-          <h3 class="uk-card-title"><b>{{ item.nombre }}</b></h3>
+        <div class="uk-card-body">
+          <h3 id="pieceTitle" class="uk-card-title"><b>{{ item.nombre }}</b></h3>
           <p>{{ item.descripcion }}</p>
           <p>
             <u>Igredientes:</u><br>

@@ -21,7 +21,11 @@ export default defineConfig({
         login: resolve(__dirname, './login.html'),
         register: resolve(__dirname, './register.html'),
         admin: resolve(__dirname, './admin/index.html'),
-        'admin/ingredients': resolve(__dirname, './admin/ingredients/index.html')
+        'admin/orders': resolve(__dirname, './admin/orders/index.html'),
+        'admin/orders/viewOrder': resolve(__dirname, './admin/orders/viewOrder.html'),
+        'admin/pieces': resolve(__dirname, './admin/pieces/index.html'),
+        'admin/pieces/piece': resolve(__dirname, './admin/pieces/piece.html'),
+
       },
     },
   }

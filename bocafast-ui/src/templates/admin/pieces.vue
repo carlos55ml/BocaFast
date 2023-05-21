@@ -53,13 +53,21 @@ export default {
 
   <main class="uk-container uk-align-center" v-if="user && user.admin">
     <h1 class="uk-text-center">BOCATAS</h1>
-    <div class="uk-container">
+    <div class="uk-container uk-text-center">
       <button
-        class="uk-position-center uk-button uk-button-small uk-button-secondary"
+        class="uk-button uk-button-small uk-button-secondary"
         @click="setPageData()"
       >
         Recargar Bocatas
       </button>
+      &nbsp;
+      <a href="/admin/pieces/piece.html">
+        <button
+        class="uk-button uk-button-small uk-button-primary"
+      >
+        Nuevo Bocata
+      </button>
+      </a>
     </div>
     <br />
     <div class="uk-form-controls uk-form-controls-text uk-form-horizontal">
@@ -83,6 +91,8 @@ export default {
             {{ item.ingredientes }}
           </p>
           <span>Precio: <b>{{ item.precio }}€</b></span>
+          <br>
+          <a :href="'/admin/pieces/piece.html?pieceId='+item.id"><button class="uk-button uk-button-secondary uk-button-small">Editar</button></a>
         </div>
       </div>
     </div>

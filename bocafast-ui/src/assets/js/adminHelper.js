@@ -109,6 +109,27 @@ export const getAllPieces = async () => {
     return err;
   })
 }
+
+export const getPieceById = async (pieceId) => {
+  return await axios.get('http://api.bocafast.io/get/pieces/getPieceById.php',
+  {
+    headers: {
+      auth_token: getUserToken(),
+    },
+    params: {
+      pieceId: pieceId
+    }
+  })
+  .then((res) => {
+    return res.data[0];
+  })
+  .catch((err) => {
+    console.log(err)
+    return err;
+  })
+}
+
+
 /** PEDIDOS */
 export const countAllActiveOrders = async () => {
   return await axios.get('http://api.bocafast.io/get/orders/countAllActiveOrders.php',
